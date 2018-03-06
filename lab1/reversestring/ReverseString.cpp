@@ -3,3 +3,20 @@
 //
 
 #include "ReverseString.h"
+#include "string"
+
+using namespace std;
+
+string reverse(string str){
+    if(str.size() == 1)
+        return str;
+    else if(str.size() == 0)
+        return "";
+    else {
+        char buf = str[0];
+        str.erase(0, 1);
+        str=reverse(str);
+        str.push_back(buf);
+        return str;
+    }
+}
