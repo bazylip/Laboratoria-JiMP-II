@@ -7,7 +7,7 @@
 
 using namespace std;
 
-string reverse(string str){
+string Reverse(string str){
     if(str.size() == 1)
         return str;
     else if(str.size() == 0)
@@ -15,7 +15,7 @@ string reverse(string str){
     else {
         char buf = str[0];
         str.erase(0, 1);
-        str=reverse(str);
+        str = Reverse(str);
         str.push_back(buf);
         return str;
     }

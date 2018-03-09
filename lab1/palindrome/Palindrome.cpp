@@ -7,7 +7,7 @@
 
 using namespace std;
 
-bool is_palindrome(string str){
+bool IsPalindrome(string str){
     while(str.size() > 1){
         char first = str.at(0), last = str.at(str.size() - 1);
         if(first != last)

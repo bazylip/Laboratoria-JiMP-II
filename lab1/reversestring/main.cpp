@@ -10,6 +10,6 @@ using namespace std;
 
 int main(void){
     string s = "h8";
-    cout<<"the result is: "<<reverse(s)<<endl;
+    cout<<"the result is: "<< Reverse(s)<<endl;
 }
 

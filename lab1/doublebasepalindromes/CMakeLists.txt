@@ -9,4 +9,5 @@ target_include_directories(libdoublebasepalindromes PUBLIC .)
 
 add_executable(doublebasepalindromes ${SOURCE_FILES} main.cpp)
 
+target_link_libraries(libdoublebasepalindromes libpalindrome)
 target_link_libraries(doublebasepalindromes libdoublebasepalindromes)

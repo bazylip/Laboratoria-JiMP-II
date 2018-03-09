@@ -6,6 +6,6 @@
 #define JIMP_EXERCISES_PALINDROME_H
 #include "string"
 
-bool is_palindrome(std::string s);
+bool IsPalindrome(std::string s);
 
 #endif //JIMP_EXERCISES_PALINDROME_H

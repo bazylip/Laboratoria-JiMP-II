@@ -18,7 +18,7 @@ int main(void){
             cout<<"Podaj napis: ";
             string s;
             cin>>s;
-            if(is_palindrome(s))
+            if(IsPalindrome(s))
                 cout<<"True"<<endl;
             else
                 cout<<"False"<<endl;
