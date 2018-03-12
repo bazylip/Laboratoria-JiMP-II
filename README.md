@@ -1,7 +1,7 @@
 ### C++ programming classes problmes ###
 
 [![Build Status](https://travis-ci.org/micwypych/cpp-exercises.svg?branch=master)](https://travis-ci.org/bazylip/Laboratoria-JiMP-II)
-[![Build status](https://ci.appveyor.com/api/projects/status/39thleljhjmtof0t?svg=true)](https://ci.appveyor.com/project/micwypych/cpp-exercises)
+[![Build status](https://ci.appveyor.com/api/projects/status/tnt4q1eu80d8uuwv?svg=true)](https://ci.appveyor.com/project/bazylip/laboratoria-jimp-ii)
 
 After cloning please replace badges with your project's badges
 
