@@ -8,13 +8,17 @@
 using namespace std;
 
 int main(void){
-    ForwardList *head;
+    ForwardList *list;
 
-    Init(&head);
+    Init(&list);
 
-    head = CreateNode(head, 5);
+    list = PushFront(list, 5);
 
-    cout<<head->data<<endl;
+    cout<<list->value<<endl;
+
+    list = PushFront(list, 6);
+
+    cout<<list->value<<endl;
 
     return 0;
 }

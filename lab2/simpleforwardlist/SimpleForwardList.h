@@ -8,13 +8,15 @@
 using namespace std;
 
 struct ForwardList{
-    int data;
+    int value;
     ForwardList *next;
 };
 
 void Init(ForwardList **head);
 void DestroyList(ForwardList *list);
-ForwardList *CreateNode(ForwardList *list, int value);
+ForwardList *CreateNode(int value);
+ForwardList *PushFront(ForwardList *list, int value);
+
 
 
 #endif //JIMP_EXERCISES_SIMPLEFORWARDLIST_H
