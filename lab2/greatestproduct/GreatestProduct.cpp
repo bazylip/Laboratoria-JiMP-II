@@ -27,8 +27,7 @@ int GreatestProduct(const vector<int> &numbers, int k){
 
             if (which) {
                 result *= newNumbers.end()[-1] * newNumbers.end()[-2];
-                newNumbers.pop_back();
-                newNumbers.pop_back();
+                newNumbers.erase(newNumbers.end(), newNumbers.end()-2);
             } else {
                 result *= newNumbers[0] * newNumbers[1];
                 newNumbers.erase(newNumbers.begin(), newNumbers.begin() + 2);
