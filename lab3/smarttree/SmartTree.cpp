@@ -48,5 +48,48 @@ namespace datastructures{
 
         return output;
     }
-    std::unique_ptr <SmartTree> RestoreTree(const std::string &tree);
+    std::unique_ptr <SmartTree> RestoreTree(const std::string &tree){
+        using ::std::string;
+
+
+
+        string StringValue, LeftChildren, RightChildren;
+        int i = 1, IntValue, counter = 0, test = 0;
+        while(!isspace(tree[i]) && tree[i] != ']'){
+            StringValue += tree[i++];
+        }
+        if(StringValue == "none")
+            return nullptr;
+
+        i++;
+        while(counter != 0 || test == 0){
+            test = 1;
+            if(tree[i] == '[')
+                ++counter;
+            if(tree[i] == ']')
+                --counter;
+            LeftChildren += tree[i];
+            ++i;
+        }
+        ++i;
+        for(i; i < tree.length()-1; ++i){
+            RightChildren += tree[i];
+        }
+
+        IntValue = std::stoi(StringValue);
+        std::unique_ptr<SmartTree> leaf = CreateLeaf(IntValue);
+
+        if(LeftChildren.compare("[none]") == 0) {
+            leaf = InsertLeftChild(std::move(leaf), nullptr);
+        }else {
+            leaf = InsertLeftChild(std::move(leaf), std::move(RestoreTree(LeftChildren)));
+        }
+        if(RightChildren.compare("[none]") == 0){
+            leaf = InsertRightChild(std::move(leaf), nullptr);
+        }else {
+            leaf = InsertRightChild(std::move(leaf), std::move(RestoreTree(RightChildren)));
+        }
+
+        return leaf;
+    }
 }
