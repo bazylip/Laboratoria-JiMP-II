@@ -16,7 +16,7 @@ namespace nets{
         std::string ToString() const;
 
     private:
-        
+
 
     };
 }
