@@ -3,3 +3,7 @@
 //
 
 #include "SimpleJson.h"
+
+namespace nets{
+
+}
