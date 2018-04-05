@@ -8,6 +8,7 @@
 #include <MemLeakTest.h>
 #include <StringUtility.h>
 #include <SimpleTemplateEngine.h>
+#include<iostream>
 
 using ::nets::View;
 using ::std::make_unique;
