@@ -11,6 +11,7 @@
 #include <MemLeakTest.h>
 #include <StringUtility.h>
 #include <SimpleJson.h>
+#include <iostream>
 
 using ::nets::JsonValue;
 using ::std::vector;
@@ -52,6 +53,8 @@ TEST_F(SimpleJsonTestTests, CreationOfJsonValues) {
   EXPECT_NE(string::npos, obj_str.find("\"name\": \"Maciej\""));
 EXPECT_TRUE(regex_match(obj_str, regex{R"(\{"\w+": ["\w\.-]+, "\w+": ["\w\.-]+, "\w+": ["\w\.-]+\})"}));
 EXPECT_FALSE(regex_match(obj_str, regex{"-107.89(0)+"}));
+
+
 }
 
 TEST_P(SimpleJsonTestTests, GetValueByNameReturnsSubValueInCaseOfObjectOrNullptrOtherwise) {

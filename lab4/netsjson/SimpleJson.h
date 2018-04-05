@@ -16,22 +16,26 @@ namespace nets{
     using ::std::experimental::optional;
     using ::std::string;
     using ::std::vector;
+    using ::std::map;
 
     class JsonValue{
     public:
-        JsonValue();
-        ~JsonValue();
+        JsonValue(int input);
+        JsonValue(double input);
+        JsonValue(bool input);
+        JsonValue(string input);
+        JsonValue(const vector<JsonValue> &input);
+        JsonValue(const map<string, JsonValue> &input);
+        ~JsonValue() = default;
 
-        std::experimental::optional<JsonValue> ValueByName(const std::string &name) const;
-        std::string ToString() const;
+        std::experimental::optional<JsonValue> ValueByName(const std::string &name);
+        std::string ToString();
 
     private:
-        int Int_;
-//        optional<double> Double_;
-//        optional<string> String_;
-//        optional<bool> Bool_;
-//        optional< vector<JsonValue> > Vector_;
-//        optional<JsonValue> Json_;
+        string Json_;
+        vector<JsonValue> JsonVector_;
+        map<string, JsonValue> JsonMap_;
+        string output_;
     };
 }
 
