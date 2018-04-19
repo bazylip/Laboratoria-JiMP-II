@@ -24,7 +24,7 @@ namespace pool {
     TextPool::TextPool(const std::initializer_list<std::string> &StringList) : StringSet_{StringList} {}
 
     TextPool::TextPool(TextPool &&t){
-        std::swap(StringSet_, t.StringSet_);   
+        std::swap(StringSet_, t.StringSet_);
     }
 
     TextPool &TextPool::operator=(TextPool &&t) {
