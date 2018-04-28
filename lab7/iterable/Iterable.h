@@ -50,12 +50,13 @@ namespace utility{
     };
 
     class Iterable{
-        virtual std::unique_ptr<IterableIterator> ConstBegin() =0;
-        virtual std::unique_ptr<IterableIterator> ConstEnd() =0;
+        virtual std::unique_ptr<IterableIterator> ConstBegin()  const =0;
+        virtual std::unique_ptr<IterableIterator> ConstEnd() const =0;
         IterableIteratorWrapper cbegin() const;
         IterableIteratorWrapper cend() const;
         IterableIteratorWrapper begin() const;
         IterableIteratorWrapper end() const;
+
     };
 
 

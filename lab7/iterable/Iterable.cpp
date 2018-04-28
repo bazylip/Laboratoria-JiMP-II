@@ -35,4 +35,20 @@ namespace utility{
         Iterator_->Next();
         return *this;
     }
+
+    IterableIteratorWrapper Iterable::cbegin() const {
+        return IterableIteratorWrapper(this->ConstBegin());
+    }
+
+    IterableIteratorWrapper Iterable::cend() const {
+        return IterableIteratorWrapper(this->ConstEnd());
+    }
+
+    IterableIteratorWrapper Iterable::begin() const {
+        return this->cbegin();
+    }
+
+    IterableIteratorWrapper Iterable::end() const {
+        return this->cend();
+    }
 }
