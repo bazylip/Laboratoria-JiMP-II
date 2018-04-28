@@ -18,27 +18,21 @@ namespace utility{
         return *this;
     }
 
-    std::vector<int>::const_iterator& ZipperIterator::GetLeft() {
-        return LeftIterator_;
+    bool ZipperIterator::NotEquals(const std::unique_ptr<utility::IterableIterator> &other) const {
+        ZipperIterator* ZipperOther = dynamic_cast<ZipperIterator*>(other.get());
+        return((ZipperOther->LeftIterator_ != this->LeftIterator_) and (ZipperOther->RightIterator_ != this->RightIterator_));
     }
 
-    std::vector<std::string>::const_iterator& ZipperIterator::GetRight() {
-        return RightIterator_;
+    bool IterableIteratorWrapper::operator!=(const IterableIteratorWrapper &other) const {
+        return Iterator_->NotEquals(other.Iterator_);
     }
-//
-//    bool ZipperIterator::NotEquals(const std::unique_ptr<utility::IterableIterator> &other) const {
-//        return(this == other)
-//    }
-//
-//    bool IterableIteratorWrapper::operator!=(const IterableIteratorWrapper &other) const {
-//        return NotEquals(std::unique_ptr<IterableIteratorWrapper> );
-//    }git status
-//
-//    std::pair<int, std::string> IterableIteratorWrapper::Dereference() const {
-//        return Iterator_->Dereference();
-//    }
-//
-//    IterableIterator& IterableIteratorWrapper::Next() {
-//        return Iterator_->Next();
-//    }
+
+    std::pair<int, std::string> IterableIteratorWrapper::operator*() const {
+        return Iterator_->Dereference();
+    }
+
+    IterableIteratorWrapper& IterableIteratorWrapper::operator++() {
+        Iterator_->Next();
+        return *this;
+    }
 }
