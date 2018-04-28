@@ -25,7 +25,7 @@ namespace utility{
                                 std::vector<std::string>::const_iterator right_begin,
                                 std::vector<int>::const_iterator left_end,
                                 std::vector<std::string>::const_iterator right_end): LeftIterator_{left_begin}, RightIterator_{right_begin}, LeftEnd_{left_end}, RightEnd_{right_end}{}
-
+        ZipperIterator() = default;
         ~ZipperIterator() override = default;
         std::pair<int, std::string> Dereference() const override;
         IterableIterator &Next() override;
@@ -36,8 +36,6 @@ namespace utility{
         std::vector<int>::const_iterator LeftEnd_;
         std::vector<std::string>::const_iterator RightEnd_;
     };
-
-    class Zipper{};
 
     class IterableIteratorWrapper{
     public:
@@ -50,6 +48,7 @@ namespace utility{
     };
 
     class Iterable{
+    public:
         virtual std::unique_ptr<IterableIterator> ConstBegin()  const =0;
         virtual std::unique_ptr<IterableIterator> ConstEnd() const =0;
         IterableIteratorWrapper cbegin() const;
@@ -57,6 +56,45 @@ namespace utility{
         IterableIteratorWrapper begin() const;
         IterableIteratorWrapper end() const;
 
+    };
+
+    class Zipper : public Iterable{
+    public:
+        Zipper(std::vector<int> First, std::vector<std::string> Second);
+        std::unique_ptr<IterableIterator> ConstBegin() const override;
+        std::unique_ptr<IterableIterator> ConstEnd() const override;
+
+    private:
+        ZipperIterator Begin_;
+        ZipperIterator End_;
+
+        std::pair<std::vector<int>, std::vector<std::string>> Vectors_;
+    };
+
+    class Product : public Iterable{
+    public:
+        Product(std::vector<int> First, std::vector<std::string> Second);
+        std::unique_ptr<IterableIterator> ConstBegin() const override;
+        std::unique_ptr<IterableIterator> ConstEnd() const override;
+
+    private:
+        ZipperIterator Begin_;
+        ZipperIterator End_;
+
+        std::pair<std::vector<int>, std::vector<std::string>> Vectors_;
+    };
+
+    class Enumerate : public Iterable{
+    public:
+        Enumerate(std::vector<std::string> Second);
+        std::unique_ptr<IterableIterator> ConstBegin() const override;
+        std::unique_ptr<IterableIterator> ConstEnd() const override;
+
+    private:
+        ZipperIterator Begin_;
+        ZipperIterator End_;
+
+        std::pair<std::vector<int>, std::vector<std::string>> Vectors_;
     };
 
 
