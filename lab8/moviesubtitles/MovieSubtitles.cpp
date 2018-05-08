@@ -22,6 +22,9 @@ namespace moviesubs{
         }
 
         while(getline(*in, Subtitle)){
+
+
+            
             ++LineNumber;
 
             if(std::regex_match(Subtitle.c_str(), matches, pattern)){
