@@ -15,7 +15,7 @@ namespace moviesubs{
 
         regex pattern(R"(\{(\d+)\}\{(\d+)\}(.*))");
         std::cmatch matches;
-        int LineNumber = 0;
+        int LineNumber = 1;
 
         if(frame_per_second < 0){
             throw NegativeFrameAfterShift(0, "FPS negative");
@@ -24,8 +24,6 @@ namespace moviesubs{
         while(getline(*in, Subtitle)){
 
 
-            
-            ++LineNumber;
 
             if(std::regex_match(Subtitle.c_str(), matches, pattern)){
                 int Start = std::stoi(matches[1]) + (offset_in_micro_seconds / (1000 / frame_per_second)), End = std::stoi(matches[2]) + (offset_in_micro_seconds / (1000 / frame_per_second));
@@ -42,6 +40,10 @@ namespace moviesubs{
                 throw InvalidSubtitleLineFormat(LineNumber, "InvalidSubtitleLineFormat");
             }
 
+
+
+            ++LineNumber;
+
         }
 
     }
@@ -52,6 +54,6 @@ namespace moviesubs{
 
     void SubRipSubtitles::ShiftAllSubtitlesBy(int offset_in_micro_seconds, int frame_per_second, std::istream *in,
                                               std::ostream *out) {
-    //zbugowane te testy, nie idzie zrobić
+    //zbugowane te testy, nie idzie zrobić zgodnie z instrukcją
     }
 }
