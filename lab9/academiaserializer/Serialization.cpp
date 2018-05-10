@@ -10,6 +10,8 @@ namespace academia{
         switch(EnumType){
             case Type::COMPUTER_LAB:
                 return "COMPUTER_LAB";
+            case Type::LECTURE_HALL:
+                return "LECTURE_HALL";
         }
     }
 }

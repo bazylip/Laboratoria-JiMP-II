@@ -41,6 +41,17 @@ namespace academia {
         std::ostream &out_;
     };
 
+    class XmlSerializer : public Serializer{
+    public:
+
+    };
+
+
+    class JsonSerializer : public Serializer{
+    public:
+
+    };
+
     class Serializable {
     public:
         virtual void Serialize(Serializer *ser) const =0;
@@ -50,23 +61,43 @@ namespace academia {
     public:
         enum class Type{
             COMPUTER_LAB
+            LECTURE_HALL
         };
 
-        Room(int Number, const std::string &Name, Type Enum) : Number_{Number}, Name_{Name}, EnumType_{Enum}{}
+        Room(int Number, const std::string &Name, Type Enum) : Id_{Number}, Name_{Name}, EnumType_{Enum}{}
         std::string EnumToString(Type EnumType) const;
 
         void Serialize(Serializer *ser) const override {
-            ser->Header("Room");
-            ser->StringField("Name", Name_);
-            ser->StringField("Type", EnumToString(EnumType_));
-            ser->IntegerField("Number", Number_);
-            ser->Footer("Room");
+            ser->Header("room");
+            ser->IntegerField("id", Id_);
+            ser->StringField("name", Name_);
+            ser->StringField("type", EnumToString(EnumType_));
+            ser->Footer("room");
         }
 
     private:
-        int Number_;
+        int Id_;
         std::string Name_;
         Type EnumType_;
+    };
+
+    class Building : public Serializable{
+    public:
+        Building(int id, std::string name, vector<reference_wrapper<const academia::Serializable>> rooms): Id_{id}, Name_{name}, Rooms_{rooms}{}
+
+        void Serialize(Serializer *ser) const override {
+            ser->Header("building");
+            ser->IntegerField("id", Id_);
+            ser->StringField("name", Name_);
+            ser->ArrayField("rooms", Rooms_);
+            ser->Footer("building");
+        }
+
+    private:
+        int Id_;
+        std::string Name_;
+        vector<reference_wrapper<const academia::Serializable>> Rooms_;
+
     };
 }
 
