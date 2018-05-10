@@ -99,6 +99,19 @@ namespace academia {
         vector<reference_wrapper<const academia::Serializable>> Rooms_;
 
     };
+
+    class BuildingRepository{
+    public:
+        BuildingRepository();
+
+        void Add(Building NewBuilding);
+        void StoreAll(Serializer *ser);
+
+    private:
+
+    };
+
+    
 }
 
 #endif //JIMP_EXERCISES_ACADEMIASERIALIZER_H
