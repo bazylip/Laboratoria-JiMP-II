@@ -7,6 +7,8 @@
 
 #include "string"
 #include "vector"
+#include "ostream"
+#include "experimental/optional"
 
 namespace academia {
 
@@ -43,13 +45,31 @@ namespace academia {
 
     class XmlSerializer : public Serializer{
     public:
-
+        explicit XmlSerializer(std::ostream *input): Serializer{input}{}
+        void IntegerField(const std::string &field_name, int value) override ;
+        void DoubleField(const std::string &field_name, double value) override;
+        void StringField(const std::string &field_name, const std::string &value) override;
+        void BooleanField(const std::string &field_name, bool value) override;
+        void SerializableField(const std::string &field_name, const academia::Serializable &value) override;
+        void ArrayField(const std::string &field_name,
+                        const vector<reference_wrapper<const academia::Serializable>> &value) override;
+        void Header(const std::string &object_name) override;
+        void Footer(const std::string &object_name) override;
     };
 
 
     class JsonSerializer : public Serializer{
     public:
-
+        explicit JsonSerializer(std::ostream *input): Serializer{input}{}
+        void IntegerField(const std::string &field_name, int value) override ;
+        void DoubleField(const std::string &field_name, double value) override;
+        void StringField(const std::string &field_name, const std::string &value) override;
+        void BooleanField(const std::string &field_name, bool value) override;
+        void SerializableField(const std::string &field_name, const academia::Serializable &value) override;
+        void ArrayField(const std::string &field_name,
+                                const vector<reference_wrapper<const academia::Serializable>> &value) override;
+        void Header(const std::string &object_name) override;
+        void Footer(const std::string &object_name) override;
     };
 
     class Serializable {
@@ -60,8 +80,9 @@ namespace academia {
     class Room : public Serializable{
     public:
         enum class Type{
-            COMPUTER_LAB
-            LECTURE_HALL
+            COMPUTER_LAB,
+            LECTURE_HALL,
+            CLASSROOM
         };
 
         Room(int Number, const std::string &Name, Type Enum) : Id_{Number}, Name_{Name}, EnumType_{Enum}{}
@@ -83,32 +104,38 @@ namespace academia {
 
     class Building : public Serializable{
     public:
-        Building(int id, std::string name, vector<reference_wrapper<const academia::Serializable>> rooms): Id_{id}, Name_{name}, Rooms_{rooms}{}
+        Building(int id, std::string name, const vector<Room> &rooms): Id_{id}, Name_{name}, Rooms_{rooms}{}
 
         void Serialize(Serializer *ser) const override {
             ser->Header("building");
             ser->IntegerField("id", Id_);
             ser->StringField("name", Name_);
-            ser->ArrayField("rooms", Rooms_);
+            ser->ArrayField("rooms", this->WrapperOfRooms());
             ser->Footer("building");
         }
+
+        vector<std::reference_wrapper<const academia::Serializable>> WrapperOfRooms() const;
+
+        int Id() const;
 
     private:
         int Id_;
         std::string Name_;
-        vector<reference_wrapper<const academia::Serializable>> Rooms_;
+        vector<Room> Rooms_;
 
     };
 
     class BuildingRepository{
     public:
-        BuildingRepository();
+        BuildingRepository(std::initializer_list<Building> Buildings): Buildings_{Buildings}{}
 
-        void Add(Building NewBuilding);
+        void Add(const Building &NewBuilding);
         void StoreAll(Serializer *ser);
+        vector<std::reference_wrapper<const academia::Serializable>> WrapperOfBuildings() const;
 
+        std::experimental::optional<Building> operator[](int Id) const;
     private:
-
+        vector<Building> Buildings_;
     };
 
     
