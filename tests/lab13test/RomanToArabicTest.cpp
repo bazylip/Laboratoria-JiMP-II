@@ -1,4 +1,6 @@
-//
-// Created by mwypych on 01.06.17.
-//
+#include "gtest/gtest.h"
+#include "ArabicRoman.h"
 
+TEST(RomanToArabic, RomanToArabicOfIReturns1){
+    EXPECT_EQ(1, RomanToArabic("I"));
+}
