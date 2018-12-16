@@ -48,7 +48,6 @@ script:
   - make lab4_simple_json_tests
   - make lab5_text_pool_tests
   - make lab6_word_counter_tests
-  - make lab7_shapes_tests
   - make lab8_micro_dvd_correct_cases_tests
   - make lab8_micro_dvd_error_cases_tests
   - make lab8_movie_subtitles_tests
