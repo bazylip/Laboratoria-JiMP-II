@@ -1,4 +1,5 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/tnt4q1eu80d8uuwv?svg=true)](https://ci.appveyor.com/project/bazylip/laboratoria-jimp-ii)
+[![Build Status](https://travis-ci.com/bazylip/cpp-course.svg?branch=master)](https://travis-ci.com/bazylip/cpp-course)
 
 ### C++ programming classes problems, taken as a university course ###
 
